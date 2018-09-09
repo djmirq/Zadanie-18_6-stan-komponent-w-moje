@@ -21,7 +21,7 @@ class Counter extends Component {
   styles = {
     fontSize: 12,
     fontWeight: "bold",
-     width: 50
+    width: 50
   };
 
   //   renderTags() {
@@ -59,13 +59,14 @@ class Counter extends Component {
           {this.formatCount()}
         </span>
         <button
-          onClick={() => this.props.onIncrement(this.props.counter)}
+          onClick={() => this.props.onIncrement(this.props.counter.id)}
           className="btn btn-success btn-sm"
         >
           Increment
         </button>
         <button
-          onClick={() => this.props.onDecrement(this.props.counter)}
+          // onClick={() => this.props.onDecrement(this.props.counter)}
+          onClick={() => this.props.onDecrement(this.props.counter.id)}
           className="btn btn-warning btn-sm m-2"
         >
           Decrement

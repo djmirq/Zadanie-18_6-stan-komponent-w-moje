@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import "./App.css";
 import Counters from "./components/counters";
- 
 
 class App extends Component {
   state = {
@@ -21,23 +20,37 @@ class App extends Component {
 
   componentDidMount() {
     //this.setState({movies}) //get data from server and update list ?
-    console.log('App - Mounted');
+    console.log("App - Mounted");
   }
 
-  handleIncrement = counter => {
-    const counters = [...this.state.counters]; //clone
-    const index = counters.indexOf(counter); //okreslenie który to id w counters
-    counters[index] = { ...counter }; //clone
-    counters[index].value++; //podniesienie wartosci
-    this.setState({ counters }); //nadpisane zmodyfikowaną listą  robimy tak, ponieważ nie usuwa się kolekcji, tylko ją modyfikuje?
+  handleIncrement = counterId => {
+    // const counters = [...this.state.counters]; //clone
+    // const index = counters.indexOf(counter); //okreslenie który to id w counters
+    // counters[index] = { ...counter }; //clone
+    // counters[index].value++; //podniesienie wartosci
+    // this.setState({ counters }); //nadpisane zmodyfikowaną listą  robimy tak, ponieważ nie usuwa się kolekcji, tylko ją modyfikuje?
+    this.setState(state => ({ //Inny zapis
+      ...state,
+      counters: state.counters.map(el => ({
+        id: el.id,
+        value: el.id === counterId ? el.value + 1 : el.value
+      }))
+    }));
   };
 
-  handleDecrement = counter => {
-    const counters = [...this.state.counters]; //clone
-    const index = counters.indexOf(counter); //okreslenie który to id w counters
-    counters[index] = { ...counter }; //clone
-    counters[index].value--; //zmiana wartosci
-    this.setState({ counters }); //nadpisane zmodyfikowaną listą  robimy tak, ponieważ nie usuwa się kolekcji, tylko ją modyfikuje?
+  handleDecrement = counterId => {
+    // const counters = [...this.state.counters]; //clone
+    // const index = counters.indexOf(counter); //okreslenie który to id w counters
+    // counters[index] = { ...counter }; //clone
+    // counters[index].value--; //zmiana wartosci
+    // this.setState({ counters }); //nadpisane zmodyfikowaną listą  robimy tak, ponieważ nie usuwa się kolekcji, tylko ją modyfikuje?
+    this.setState(state => ({  //Inny zapis
+      ...state,
+      counters: state.counters.map(el => ({
+        id: el.id,
+        value: el.id === counterId ? el.value - 1 : el.value
+      }))
+    }));
   };
 
   handleReset = () => {
@@ -54,7 +67,7 @@ class App extends Component {
   };
 
   render() {
-    console.log('App - Rendered');
+    console.log("App - Rendered");
 
     return (
       <React.Fragment>
